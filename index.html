@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard — WebComponents</title>
+
+  <link rel="stylesheet" href="./index.css">
+
+  <!-- Cargamos todos los componentes vía index.js (ES module) -->
+  <script type="module" src="./index.js"></script>
+</head>
+<body>
+
+  <p class="page-label">// WebComponents · Shadow DOM · Custom Events · Parts · Atributos reactivos</p>
+
+  <!--
+    <user-dashboard> es el orquestador.
+    Captura el evento "usercard:greet" que burbujea desde <user-card>
+    y llama badge.greet(name) en <warning-badge>.
+  -->
+  <user-dashboard
+    avatar="🧑‍🏫"
+    name="Alonso"
+    role="Profesor"
+    city="liberia+guanacaste">
+  </user-dashboard>
+
+</body>
+</html>
