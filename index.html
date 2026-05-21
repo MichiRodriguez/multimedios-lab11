@@ -1,29 +1,34 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Dashboard — WebComponents</title>
+  <meta charset="UTF-8" />
 
-  <link rel="stylesheet" href="./index.css">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-  <!-- Cargamos todos los componentes vía index.js (ES module) -->
-  <script type="module" src="./index.js"></script>
+  <title>Dashboard</title>
+
+  <link rel="stylesheet" href="./index.css" />
+
+  <script
+    type="module"
+    src="./index.js">
+  </script>
 </head>
+
 <body>
 
-  <p class="page-label">// WebComponents · Shadow DOM · Custom Events · Parts · Atributos reactivos</p>
+  <p class="page-label">
+    Multimedios-Lab11
+  </p>
 
-  <!--
-    <user-dashboard> es el orquestador.
-    Captura el evento "usercard:greet" que burbujea desde <user-card>
-    y llama badge.greet(name) en <warning-badge>.
-  -->
   <user-dashboard
-    avatar="🧑‍🏫"
+    image="./assets/profe.jpg"
     name="Alonso"
     role="Profesor"
-    city="liberia+guanacaste">
+    city="Liberia">
   </user-dashboard>
 
 </body>
