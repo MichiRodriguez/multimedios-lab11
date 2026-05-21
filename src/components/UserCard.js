@@ -5,96 +5,102 @@ class UserCard extends HTMLElement {
   }
 
   connectedCallback() {
-    const avatar = this.getAttribute("avatar") ?? "👤";
-    const name   = this.getAttribute("name")   ?? "Usuario";
-    const role   = this.getAttribute("role")   ?? "Invitado";
-    this.render(avatar, name, role);
+    const image = this.getAttribute("image") || "";
+    const name = this.getAttribute("name") || "Usuario";
+    const role = this.getAttribute("role") || "Invitado";
+
+    this.render(image, name, role);
   }
 
-  render(avatar, name, role) {
-    this.shadowRoot.innerHTML = /* html */`
+  render(image, name, role) {
+    this.shadowRoot.innerHTML = `
       <style>
         :host {
           display: block;
         }
+
         .card {
-          background: linear-gradient(135deg, #1a2a4a 0%, #0d1b35 100%);
-          border: 1px solid rgba(100, 160, 255, 0.25);
-          border-radius: 14px;
-          padding: 1.1rem 1.25rem;
+          background: #60a5fa;
+          border-radius: 16px;
+          padding: 1rem;
           display: flex;
           align-items: center;
-          gap: 0.85rem;
+          justify-content: space-between;
+          gap: 1rem;
         }
-        .avatar {
-          width: 52px;
-          height: 52px;
-          border-radius: 50%;
-          background: linear-gradient(135deg, #3b82f6, #6366f1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 1.5rem;
-          flex-shrink: 0;
-          box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
-        }
+
         .info {
-          flex: 1;
-          min-width: 0;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
         }
-        .name {
-          font-family: 'Courier New', monospace;
-          font-size: 0.9rem;
-          font-weight: 700;
-          color: #e2e8f0;
-          margin: 0 0 0.15rem;
-          letter-spacing: 0.04em;
+
+        .avatar {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          overflow: hidden;
+          background: white;
+          flex-shrink: 0;
         }
-        .role {
-          font-family: 'Courier New', monospace;
-          font-size: 0.65rem;
-          color: #64a0ff;
-          text-transform: uppercase;
-          letter-spacing: 0.1em;
+
+        .avatar img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .text h3 {
           margin: 0;
+          font-size: 1rem;
         }
+
+        .text p {
+          margin: 0;
+          font-size: 0.8rem;
+        }
+
         button {
-          background: linear-gradient(135deg, #2563eb, #4f46e5);
-          color: white;
           border: none;
-          border-radius: 8px;
-          padding: 0.5rem 1rem;
-          font-family: 'Courier New', monospace;
-          font-size: 0.7rem;
-          font-weight: 700;
-          letter-spacing: 0.07em;
-          text-transform: uppercase;
+          background: #2563eb;
+          color: white;
+          padding: 0.7rem 1rem;
+          border-radius: 10px;
           cursor: pointer;
-          white-space: nowrap;
-          box-shadow: 0 0 8px rgba(79, 70, 229, 0.4);
-          transition: transform 0.15s, box-shadow 0.15s;
         }
+
         button:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 0 16px rgba(79, 70, 229, 0.7);
+          background: #1d4ed8;
         }
       </style>
+
       <div class="card">
-        <div class="avatar" part="avatar">${avatar}</div>
-        <div class="info" part="info">
-          <p class="name">${name}</p>
-          <p class="role">${role}</p>
+        <div class="info">
+
+          <div class="avatar">
+            <img src="${image}" alt="avatar">
+          </div>
+
+          <div class="text">
+            <h3>${name}</h3>
+            <p>${role}</p>
+          </div>
         </div>
-        <button part="btn">Saludar</button>
+
+        <button>Saludar</button>
       </div>
     `;
 
-    this.shadowRoot.querySelector("button").addEventListener("click", () => {
-      this.dispatchEvent(new CustomEvent("usercard:greet", {
-        bubbles: true,
-        composed: true,
-        detail: { name }
-      }));
+    const button = this.shadowRoot.querySelector("button");
+
+    button.addEventListener("click", () => {
+      this.dispatchEvent(
+        new CustomEvent("usercard:greet", {
+          bubbles: true,
+          composed: true,
+          detail: { name }
+        })
+      );
     });
   }
 }
